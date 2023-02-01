@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/Icinga/icinga2:
+      branch: master
+      repo: https://github.com/Icinga/icinga2.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/Icinga/icinga2 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-lime-chow.sh
+        container: qc.acc_woolly-seashell-lionfish
+  QC.Doc:
+    repos:
+      github.com/Icinga/icinga2 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-green-lemming.sh
+        container: qc.doc_seedy-ruby-budgerigar
+      github.com/Icinga/icinga2 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-lavender-dolphin.sh
+        container: qc.doc_clammy-brown-opossum
+      github.com/Icinga/icinga2 markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-auburn-corgi.sh
+        container: qc.doc_droopy-ochre-camel
+  QC.Lic:
+    repos:
+      github.com/Icinga/icinga2 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-linen-albatross.sh
+        container: qc.lic_breezy-eggplant-stoat
+  QC.Sec:
+    repos:
+      github.com/Icinga/icinga2 bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-brown-crocodile.sh
+        container: qc.sec_wheezy-indigo-capuchin
+  QC.Sty:
+    repos:
+      github.com/Icinga/icinga2 flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-coral-wolverine.sh
+        container: qc.sty_boozy-russet-coral
+      github.com/Icinga/icinga2 jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-platinum-discus.sh
+        container: qc.sty_baggy-carmine-elephant
+  QC.Ver:
+    repos:
+      github.com/Icinga/icinga2 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-azure-guppy.sh
+        container: qc.ver_beady-cobalt-chin
+timeout: 5400
